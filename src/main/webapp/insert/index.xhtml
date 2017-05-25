@@ -6,28 +6,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Insert Disc</title>
+        <style>
+            .red{
+                color:red;
+            }
+        </style>
     </h:head>
     <h:body>
         <h:form id="form">
             <p:panel id="panel" header="Form" style="margin-bottom:10px;">
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel for="txtTitulo" value="Título"/>
-                    <p:inputText id="txtTitulo" class="margin-left" value="${discoBeanInsert.titulo}"/>
-                    <p:message for="txtTitulo"/>
+                    <p:inputText id="txtTitulo" class="margin-left" value="${discoBeanInsert.titulo}" requiredMessage="No puede ir vacio"/>
+                    <h:message for="txtTitulo" errorClass="red"/>
 
                     <p:outputLabel for="txtAgno" value="Año"/>
-                    <p:inputText id="txtAgno" class="margin-left" value="${discoBeanInsert.agno}"/>
-                    <p:message for="txtAgno"/>
+                    <p:inputText id="txtAgno" class="margin-left" value="${discoBeanInsert.agno}" requiredMessage="No puede ir vacio"/>
+                    <h:message for="txtAgno" errorClass="red"/>
 
                     <p:outputLabel for="txtInterprete" value="Interprete"/>
-                    <p:inputText id="txtInterprete" class="margin-left" value="${discoBeanInsert.idInterprete}"/>
-                    <p:message for="txtInterprete"/>
+                    <p:inputText id="txtInterprete" class="margin-left" value="${discoBeanInsert.idInterprete}" requiredMessage="No puede ir vacio"/>
+                    <h:message for="txtInterprete" errorClass="red"/>
 
                 </h:panelGrid>
 
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Insertar"  action="#{discoBeanInsert.insertDisc()}"/>
+                        <p:commandButton value="Insertar"  action="#{discoBeanInsert.insertDisc()}" update="@form"/>
                     </f:facet>
                     <f:facet name="right">
                         <p:commandButton type="reset" value="Cancelar"/>
@@ -36,6 +41,7 @@
                 </p:toolbar>
             </p:panel>
         </h:form>
+        <h:link outcome="/index.html" value="Atrás" />
     </h:body>
 </html>
 

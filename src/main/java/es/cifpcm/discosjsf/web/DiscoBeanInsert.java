@@ -13,6 +13,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,21 +25,26 @@ public class DiscoBeanInsert extends Disco implements Serializable {
 
     public DiscoBeanInsert() {
     }
-
+    
+    
+    @NotNull(message = "El idInterprete no puede ir en blanco")
     @Override
     public int getIdInterprete() {
         return super.getIdInterprete(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @NotNull(message = "El año no puede ir en blanco y/o no puede ser menor que 1800")
     @Override
     public int getAgno() {
         return super.getAgno(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @NotNull(message = "El título no puede ir en blanco")
     @Override
     public String getTitulo() {
         return super.getTitulo(); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public int getIdDisco() {
