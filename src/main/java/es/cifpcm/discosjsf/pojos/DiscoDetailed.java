@@ -5,7 +5,6 @@
  */
 package es.cifpcm.discosjsf.pojos;
 
-import es.cifpcm.discosjsf.web.DiscoInsertBean;
 import java.io.Serializable;
 
 /**
@@ -37,9 +36,7 @@ public class DiscoDetailed extends Disco implements Serializable {
         this.interprete = interprete;
     }
 
-    public DiscoDetailed addDisco(DiscoInsertBean aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     
     

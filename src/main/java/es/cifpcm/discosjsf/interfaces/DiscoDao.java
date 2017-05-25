@@ -5,6 +5,7 @@
  */
 package es.cifpcm.discosjsf.interfaces;
 
+import es.cifpcm.discosjsf.pojos.Disco;
 import es.cifpcm.discosjsf.pojos.DiscoDetailed;
 import java.util.List;
 
@@ -14,5 +15,5 @@ import java.util.List;
  */
 public interface DiscoDao {
     public List<DiscoDetailed> selectDetails();
-    public DiscoDetailed addDisc(DiscoDetailed disco);
+    public Disco insertDisc(Disco disco);
 }

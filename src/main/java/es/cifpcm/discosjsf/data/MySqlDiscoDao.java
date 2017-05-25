@@ -7,6 +7,7 @@ package es.cifpcm.discosjsf.data;
 
 import es.cifpcm.discosjsf.connection.ConnectionProvider;
 import es.cifpcm.discosjsf.interfaces.DiscoDao;
+import es.cifpcm.discosjsf.pojos.Disco;
 import es.cifpcm.discosjsf.pojos.DiscoDetailed;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,12 +23,12 @@ import org.slf4j.LoggerFactory;
  * @author omarl
  */
 public class MySqlDiscoDao implements DiscoDao {
-    
+
     ConnectionProvider provider;
     Connection conn;
-    
+
     private final static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MySqlDiscoDao.class);
-    
+
     public MySqlDiscoDao(ConnectionProvider aThis) {
         this.provider = aThis;
         this.conn = provider.getConnection();
@@ -76,10 +77,10 @@ public class MySqlDiscoDao implements DiscoDao {
     @Override
     public List<DiscoDetailed> selectDetails() {
         LOGGER.debug("Generando un selectDetails");
-        
+
         List<DiscoDetailed> listadoDiscoDetails = new ArrayList<>();
         final String query = "SELECT d.Titulo, d.agno, d.idInterprete, i.Interprete FROM Disco d INNER JOIN Interprete i ON d.idInterprete = i.idInterprete";
-        
+
         try (Statement st = conn.createStatement()) {
             try (ResultSet rs = st.executeQuery(query)) {
                 while (rs.next()) {
@@ -92,35 +93,33 @@ public class MySqlDiscoDao implements DiscoDao {
                 }
             }
         } catch (SQLException ex) {
-            LOGGER.error("****** Error al hacer la consulta de Discos --> " + ex + " ******");
+            LOGGER.error("Error al hacer la consulta de Discos" + ex);
             listadoDiscoDetails = null;
         }
         return listadoDiscoDetails;
     }
-    
+
     @Override
-    public DiscoDetailed addDisc(DiscoDetailed disco) {
+    public Disco insertDisc(Disco disco) {
         LOGGER.debug("Generando addDisc");
-        
+
         String query = "INSERT INTO Disco (Titulo, Agno, idInterprete) VALUES(?,?,?)";
-        
+
         try (PreparedStatement st = conn.prepareStatement(query)) {
             st.setString(1, disco.getTitulo());
             st.setInt(2, disco.getAgno());
             st.setInt(3, disco.getIdInterprete());
-            
+
             int discInserted = st.executeUpdate();
             if (discInserted > 0) {
                 LOGGER.debug("Disco Insertado!!");
             }
-            
+
         } catch (SQLException ex) {
             LOGGER.debug("Error en la consulta de addDisc");
             disco = null;
         }
-        
+
         return disco;
-        
     }
-    
 }
