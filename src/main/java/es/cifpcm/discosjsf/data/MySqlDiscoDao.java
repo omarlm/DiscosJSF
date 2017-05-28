@@ -104,8 +104,9 @@ public class MySqlDiscoDao implements DiscoDao {
         LOGGER.debug("Generando addDisc");
 
         String query = "INSERT INTO Disco (Titulo, Agno, idInterprete) VALUES(?,?,?)";
+        //String query = "INSERT INTO Disco (Titulo, Agno) VALUES(?,?)";
 
-        try (PreparedStatement st = conn.prepareStatement(query)) {
+        try (PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, disco.getTitulo());
             st.setInt(2, disco.getAgno());
             st.setInt(3, disco.getIdInterprete());
@@ -113,10 +114,20 @@ public class MySqlDiscoDao implements DiscoDao {
             int discInserted = st.executeUpdate();
             if (discInserted > 0) {
                 LOGGER.debug("Disco Insertado!!");
+
+                try (ResultSet rs = st.getGeneratedKeys()) {
+                    if (rs.next()) {
+
+                        disco.setIdDisco(rs.getInt(1));
+
+                    }
+
+                }
+
             }
 
         } catch (SQLException ex) {
-            LOGGER.debug("Error en la consulta de addDisc");
+            LOGGER.error("Error en la consulta de addDisc", ex);
             disco = null;
         }
 

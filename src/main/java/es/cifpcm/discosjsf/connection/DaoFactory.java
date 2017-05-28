@@ -5,8 +5,14 @@
  */
 package es.cifpcm.discosjsf.connection;
 
+import es.cifpcm.discosjsf.data.MySqlClienteDao;
 import es.cifpcm.discosjsf.data.MySqlDiscoDao;
+import es.cifpcm.discosjsf.data.MySqlDiscoTipoDao;
+import es.cifpcm.discosjsf.data.MySqlTipoDao;
+import es.cifpcm.discosjsf.interfaces.ClienteDao;
 import es.cifpcm.discosjsf.interfaces.DiscoDao;
+import es.cifpcm.discosjsf.interfaces.DiscoTipoDao;
+import es.cifpcm.discosjsf.interfaces.TipoDao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.naming.InitialContext;
@@ -72,4 +78,15 @@ public class DaoFactory implements ConnectionProvider {
         return new MySqlDiscoDao(this);
     }
 
+    public ClienteDao getClientesDao() {
+        return new MySqlClienteDao(this);
+    }
+
+    public TipoDao getTipoDao() {
+        return new MySqlTipoDao(this);
+    }
+
+    public DiscoTipoDao getDiscoTipoDao() {
+        return new MySqlDiscoTipoDao(this);
+    }
 }

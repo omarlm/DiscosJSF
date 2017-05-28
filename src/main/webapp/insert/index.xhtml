@@ -14,25 +14,30 @@
     </h:head>
     <h:body>
         <h:form id="form">
+            <p:growl/>
             <p:panel id="panel" header="Form" style="margin-bottom:10px;">
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel for="txtTitulo" value="Título"/>
                     <p:inputText id="txtTitulo" class="margin-left" value="${discoBeanInsert.titulo}" requiredMessage="No puede ir vacio"/>
-                    <h:message for="txtTitulo" errorClass="red"/>
+                    <p:message for="txtTitulo"/>
 
                     <p:outputLabel for="txtAgno" value="Año"/>
                     <p:inputText id="txtAgno" class="margin-left" value="${discoBeanInsert.agno}" requiredMessage="No puede ir vacio"/>
-                    <h:message for="txtAgno" errorClass="red"/>
+                    <p:message for="txtAgno"/>
 
                     <p:outputLabel for="txtInterprete" value="Interprete"/>
                     <p:inputText id="txtInterprete" class="margin-left" value="${discoBeanInsert.idInterprete}" requiredMessage="No puede ir vacio"/>
-                    <h:message for="txtInterprete" errorClass="red"/>
-
+                    <p:message for="txtInterprete"/>
+                    
+                    <p:outputLabel for="ddlTipo" value="Tipo"/>
+                    <p:selectOneMenu id="ddlTipo" value="#{discoBeanInsert.newTipo}">
+                        <f:selectItems value="#{tiposBean.tipos}" var="tipo" itemValue="#{tipo.idTipo}" itemLabel="#{tipo.tipo}"/>               
+                    </p:selectOneMenu>
                 </h:panelGrid>
 
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Insertar"  action="#{discoBeanInsert.insertDisc()}" update="@form"/>
+                        <p:commandButton value="Insertar"  action="#{discoBeanInsert.insertDisc()}" update="form"/>
                     </f:facet>
                     <f:facet name="right">
                         <p:commandButton type="reset" value="Cancelar"/>

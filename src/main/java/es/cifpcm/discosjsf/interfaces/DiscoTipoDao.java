@@ -5,13 +5,12 @@
  */
 package es.cifpcm.discosjsf.interfaces;
 
-import es.cifpcm.discosjsf.pojos.Interprete;
-import java.util.List;
-
 /**
  *
  * @author omarl
  */
-public interface InterpreteDao {
-    public List<Interprete> selectAll();
+public interface DiscoTipoDao {
+    
+    public void insert(Integer idDisco, Integer idTipo);
+    
 }
